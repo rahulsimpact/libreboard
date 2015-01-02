@@ -23,6 +23,14 @@ Users.before.insert(function (userId, doc) {
     // connect profile.status default
     doc.profile.status = 'offline';
 
+    // XXX The meteor convention for this field is `name` not `fullname`, see for instance the
+    // documentation: http://docs.meteor.com/#/full/meteor_users
+    // Third parties packages like `kenton:accounts-sandstorm` or `aldeed:simple-schema` assume
+    // that this convention is respected. So maybe we should rename this field?
+    if (! doc.profile.fullname && doc.profile.name) {
+        doc.profile.fullname = doc.profile.name.replace("%20", " ");
+    }
+
     // slugify to username
     doc.username = slugify(doc.profile.fullname, '');
 });

@@ -73,7 +73,7 @@ isServer(function() {
         // admin member insert
         BoardMembers.insert({
             boardId: doc._id,
-            userId: userId,
+            userId: doc.userId,
             memberType: "admin",
             approved: true
         });
@@ -84,7 +84,7 @@ isServer(function() {
             activityTypeId: doc._id,
             activityType: "createBoard",
             boardId: doc._id,
-            userId: userId
+            userId: doc.userId
         });
     });
 
@@ -93,7 +93,7 @@ isServer(function() {
             type: 'member',
             activityType: "addBoardMember",
             boardId: doc.boardId,
-            userId: userId,
+            userId: doc.userId,
             memberId: doc._id
         });
     });

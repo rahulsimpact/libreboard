@@ -20,7 +20,7 @@ Router.configure({
         // authenticated
         if (!Meteor.user() && authenticate) {
 
-            // redirect 
+            // redirect
             this.redirect(authenticate);
 
             // options authenticate not next().
